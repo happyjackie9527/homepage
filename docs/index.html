@@ -125,7 +125,7 @@
         camera.position.z = 5;
 
         // 加载 GLTF 模型
-        const loader = new GLTFLoader();
+        const loader = new THREE.GLTFLoader(); // 注意这里的使用方式
         loader.load(
             'nezha.glb', // 替换为你的哪吒 3D 模型文件路径
             function (gltf) {
