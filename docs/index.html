@@ -1,278 +1,317 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三维交互个人主页</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    #canvas-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .content-section {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s ease;
-    }
-
-    .content-section:hover {
-      transform: translateY(-5px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开发者空间</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-
 <body class="font-sans antialiased">
-  <!-- 3D 背景容器 -->
-  <div id="canvas-container"></div>
+    <!-- 3D背景容器 -->
+    <div id="canvas-container"></div>
 
-  <!-- 主内容 -->
-  <div class="container mx-auto px-4 py-28 relative">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-lg shadow-sm z-50">
-      <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          TechSpace
+    <!-- 主要内容容器 -->
+    <div class="container mx-auto px-4 py-28 relative">
+        <!-- 固定导航 -->
+        <nav class="fixed left-0 top-0 w-full bg-white/90 backdrop-blur-lg shadow-sm z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-center">
+                <div class="flex items-center justify-between max-w-4xl w-full">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        TechSpace
+                    </div>
+                    <div class="space-x-6 text-gray-600">
+                        <a href="#about" class="hover:text-blue-600 transition-colors">关于</a>
+                        <a href="#hobbies" class="hover:text-blue-600 transition-colors">技术</a>
+                        <a href="#news" class="hover:text-blue-600 transition-colors">动态</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 响应式网格布局 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- 主内容区域 -->
+            <main class="lg:col-span-2 space-y-8">
+                <section id="news" class="content-section rounded-2xl p-8 shadow-xl">
+                    <h2 class="text-3xl font-bold mb-8 text-gray-800">技术动态</h2>
+                    <div id="news-list" class="space-y-4">
+                        <!-- 新闻由JavaScript动态生成 -->
+                    </div>
+                </section>
+            </main>
+
+            <!-- 侧边栏区域 -->
+            <aside class="space-y-8">
+                <!-- 个人信息 -->
+                <section id="about" class="content-section rounded-2xl p-8 shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-40 h-40 rounded-2xl overflow-hidden border-[3px] border-white shadow-lg">
+                            <img src="./assets/avatar.png" 
+                                 alt="开发者画像"
+                                 class="w-full h-full object-cover transform hover:scale-105 transition-transform">
+                        </div>
+                        <h1 class="text-3xl font-bold mt-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            王小明
+                        </h1>
+                        <div class="space-y-2 text-gray-600 text-sm mt-4">
+                            <p class="flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                全栈开发 | 上海
+                            </p>
+                            <p class="flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                </svg>
+                                +86 138-1234-5678
+                            </p>
+                        </div>
+                        <div class="flex gap-3 mt-6">
+                            <a href="#" class="social-btn px-4 py-2 text-sm rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition">
+                                GitHub
+                            </a>
+                            <a href="#" class="social-btn px-4 py-2 text-sm rounded-full bg-purple-100 text-purple-600 hover:bg-purple-200 transition">
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 技术领域 -->
+                <section id="hobbies" class="content-section rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800">技术领域</h2>
+                    <div class="space-y-4">
+                        <div class="tech-item p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition">
+                            <h3 class="font-semibold text-blue-600">Web开发</h3>
+                            <p class="text-sm text-gray-600 mt-2">React/Next.js/Node.js</p>
+                        </div>
+                        <div class="tech-item p-4 rounded-lg bg-purple-50 hover:bg-purple-100 transition">
+                            <h3 class="font-semibold text-purple-600">云原生</h3>
+                            <p class="text-sm text-gray-600 mt-2">Docker/Kubernetes/AWS</p>
+                        </div>
+                        <div class="tech-item p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition">
+                            <h3 class="font-semibold text-blue-600">AI工程</h3>
+                            <p class="text-sm text-gray-600 mt-2">TensorFlow/PyTorch</p>
+                        </div>
+                    </div>
+                </section>
+            </aside>
         </div>
-        <div class="space-x-6 text-gray-600">
-          <a href="#about" class="hover:text-blue-600 transition-colors">关于</a>
-          <a href="#hobbies" class="hover:text-blue-600 transition-colors">兴趣</a>
-          <a href="#news" class="hover:text-blue-600 transition-colors">新闻</a>
-        </div>
-      </div>
-    </nav>
+    </div>
 
-    <!-- 个人信息模块 -->
-    <section id="about" class="content-section rounded-2xl p-8 mb-20 shadow-xl">
-      <div class="flex flex-col md:flex-row items-center gap-8">
-        <div class="w-52 h-52 rounded-2xl overflow-hidden border-[3px] border-white shadow-2xl">
-          <img src="./assets/avatar.png" alt="Profile"
-            class="w-full h-full object-cover transform hover:scale-105 transition-transform">
-        </div>
-        <div class="flex-1">
-          <h1
-            class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            王小明
-          </h1>
-          <div class="space-y-2 text-gray-600 text-lg">
-            <p>📌 全栈开发工程师 | 上海</p>
-            <p>📧 wangxm@example.com</p>
-            <p>📱 +86 138-1234-5678</p>
-          </div>
-          <div class="mt-6 flex gap-4">
-            <a href="#"
-              class="social-btn px-5 py-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition">
-              GitHub
-            </a>
-            <a href="#"
-              class="social-btn px-5 py-2 rounded-full bg-purple-100 text-purple-600 hover:bg-purple-200 transition">
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 兴趣爱好模块 -->
-    <section id="hobbies" class="content-section rounded-2xl p-8 mb-20 shadow-xl">
-      <h2 class="text-3xl font-bold mb-8 text-gray-800">兴趣领域</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="hobby-card p-6 rounded-xl bg-white hover:shadow-lg transition">
-          <div class="text-blue-500 text-4xl mb-4">🤖</div>
-          <h3 class="text-xl font-semibold mb-2">人工智能</h3>
-          <p class="text-gray-600">探索机器学习在现实场景中的应用</p>
-        </div>
-        <div class="hobby-card p-6 rounded-xl bg-white hover:shadow-lg transition">
-          <div class="text-green-500 text-4xl mb-4">🌐</div>
-          <h3 class="text-xl font-semibold mb-2">Web3开发</h3>
-          <p class="text-gray-600">研究区块链与去中心化应用开发</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 新闻模块 -->
-    <section id="news" class="content-section rounded-2xl p-8 shadow-xl">
-      <h2 class="text-3xl font-bold mb-8 text-gray-800">技术动态</h2>
-      <div id="news-list" class="space-y-4">
-        <!-- 新闻条目由JS动态生成 -->
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // Three.js 可视化背景
-    let scene, camera, renderer, particles;
-
-    function initThree() {
-      // 初始化场景
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-      // 创建粒子系统
-      const geometry = new THREE.BufferGeometry();
-      const vertices = [];
-      const particleCount = 3000;
-
-      for (let i = 0; i < particleCount; i++) {
-        vertices.push(
-          THREE.MathUtils.randFloatSpread(1800),
-          THREE.MathUtils.randFloatSpread(1800),
-          THREE.MathUtils.randFloatSpread(1800)
-        );
-      }
-
-      geometry.setAttribute(
-        'position',
-        new THREE.Float32BufferAttribute(vertices, 3)
-      );
-
-      const material = new THREE.PointsMaterial({
-        size: 3,
-        color: new THREE.Color(0x4F46E5),
-        transparent: true,
-        opacity: 0.7,
-        blending: THREE.AdditiveBlending
-      });
-
-      particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-
-      camera.position.z = 1200;
-
-      // 动画循环
-      function animate() {
-        requestAnimationFrame(animate);
-
-        particles.rotation.x += 0.0003;
-        particles.rotation.y += 0.0002;
-
-        renderer.render(scene, camera);
-      }
-
-      // 响应式处理
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      animate();
-    }
-
-    // 动态加载新闻
-    function loadNews() {
-      const newsData = [
-        {
-          title: "WebAssembly 2.0草案正式发布",
-          content: "新一代WebAssembly标准将支持多线程和SIMD指令",
-          source: "Mozilla开发者博客",
-          date: "2023-12-15"
-        },
-        {
-          title: "React 19将引入编译器优化",
-          content: "自动记忆化框架即将面世，性能提升最高可达30%",
-          source: "React官方推特",
-          date: "2023-12-14"
-        },
-        {
-          title: "三体问题AI求解新突破",
-          content: "DeepMind新算法解决N体问题速度提升1亿倍",
-          source: "Nature期刊",
-          date: "2023-12-13"
-        }
-      ];
-
-      const newsList = document.getElementById('news-list');
-      newsData.forEach(item => {
-        const article = document.createElement('article');
-        article.className = 'p-4 bg-white rounded-lg hover:shadow-md transition';
-        article.innerHTML = `
-                      <div class="flex justify-between items-start mb-2">
-                          <h3 class="text-lg font-semibold text-gray-800">${item.title}</h3>
-                          <span class="text-sm text-gray-400">${item.date}</span>
-                      </div>
-                      <p class="text-gray-600">${item.content}</p>
-                      <div class="mt-2 text-sm text-blue-500">来源：${item.source}</div>
-                  `;
-        newsList.appendChild(article);
-      });
-    }
-
-    // 初始化执行
-    window.addEventListener('load', () => {
-      initThree();
-      loadNews();
-
-      // 平滑滚动
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+    <script>
+        // 动态加载新闻
+        function loadNews() {
+          const newsData = [
+            {
+              title: "WebAssembly 2.0草案正式发布",
+              content: "新一代WebAssembly标准将支持多线程和SIMD指令",
+              source: "Mozilla开发者博客",
+              date: "2023-12-15"
+            },
+            {
+              title: "React 19将引入编译器优化",
+              content: "自动记忆化框架即将面世，性能提升最高可达30%",
+              source: "React官方推特",
+              date: "2023-12-14"
+            },
+            {
+              title: "三体问题AI求解新突破",
+              content: "DeepMind新算法解决N体问题速度提升1亿倍",
+              source: "Nature期刊",
+              date: "2023-12-13"
+            }
+          ];
+    
+          const newsList = document.getElementById('news-list');
+          newsData.forEach(item => {
+            const article = document.createElement('article');
+            article.className = 'p-4 bg-white rounded-lg hover:shadow-md transition';
+            article.innerHTML = `
+                          <div class="flex justify-between items-start mb-2">
+                              <h3 class="text-lg font-semibold text-gray-800">${item.title}</h3>
+                              <span class="text-sm text-gray-400">${item.date}</span>
+                          </div>
+                          <p class="text-gray-600">${item.content}</p>
+                          <div class="mt-2 text-sm text-blue-500">来源：${item.source}</div>
+                      `;
+            newsList.appendChild(article);
           });
-        });
-        // 启动平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
+        }
+        
+        // Three.js 可视化背景
+        let scene, camera, renderer, particles;
+    
+        function initThree() {
+          // 初始化场景
+          scene = new THREE.Scene();
+          camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+          );
+          renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: true
+          });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          document.getElementById('canvas-container').appendChild(renderer.domElement);
+    
+          // 创建粒子系统
+          const geometry = new THREE.BufferGeometry();
+          const vertices = [];
+          const particleCount = 3000;
+    
+          for (let i = 0; i < particleCount; i++) {
+            vertices.push(
+              THREE.MathUtils.randFloatSpread(1800),
+              THREE.MathUtils.randFloatSpread(1800),
+              THREE.MathUtils.randFloatSpread(1800)
+            );
+          }
+    
+          geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(vertices, 3)
+          );
+    
+          const material = new THREE.PointsMaterial({
+            size: 3,
+            color: new THREE.Color(0x4F46E5),
+            transparent: true,
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending
+          });
+    
+          particles = new THREE.Points(geometry, material);
+          scene.add(particles);
+    
+          camera.position.z = 1200;
+    
+          // 动画循环
+          function animate() {
+            requestAnimationFrame(animate);
+    
+            particles.rotation.x += 0.0003;
+            particles.rotation.y += 0.0002;
+    
+            renderer.render(scene, camera);
+          }
+    
+          // 响应式处理
+          window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+          });
+    
+          animate();
+        }
+    
+        // 初始化执行
+        window.addEventListener('load', () => {
+          initThree();
+          loadNews();
+    
+          // 平滑滚动
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+              });
+            });
+            // 启动平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              });
             });
           });
+    
+          // 启动视差效果
+          document.addEventListener('mousemove', (e) => {
+            if (particles) {
+              particles.rotation.x += (e.clientY - window.innerHeight / 2) * 0.00005;
+              particles.rotation.y += (e.clientX - window.innerWidth / 2) * 0.00005;
+            }
+          });
         });
-      });
-
-      // 启动视差效果
-      document.addEventListener('mousemove', (e) => {
-        if (particles) {
-          particles.rotation.x += (e.clientY - window.innerHeight / 2) * 0.00005;
-          particles.rotation.y += (e.clientX - window.innerWidth / 2) * 0.00005;
-        }
-      });
-    });
-  </script>
-
-  <!-- 页面性能优化策略 -->
-  <script>
-    // 图片预加载
-    window.onload = function () {
-      const img = new Image();
-      img.src = 'https://source.unsplash.com/featured/?portrait';
-
-      // 请求空闲时处理
-      requestIdleCallback(() => {
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(section => {
-          new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-              }
+      </script>
+    
+      <!-- 页面性能优化策略 -->
+      <script>
+        // 图片预加载
+        window.onload = function () {
+          const img = new Image();
+          img.src = 'https://source.unsplash.com/featured/?portrait';
+    
+          // 请求空闲时处理
+          requestIdleCallback(() => {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+              new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                  }
+                });
+              }).observe(section);
             });
-          }).observe(section);
-        });
-      });
-    };
-  </script>
+          });
+        };
+      </script>
+
+    <!-- 自定义样式 -->
+    <style>
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .social-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tech-item {
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            #canvas-container {
+                opacity: 0.3;
+            }
+            
+            .content-section {
+                backdrop-filter: blur(6px);
+            }
+        }
+    </style>
 </body>
-
 </html>
