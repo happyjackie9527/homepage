@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 800px;
+        }
+
+        .info-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .info-card h1 {
+            color: #2c3e50;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .info-card ul li {
+            margin-bottom: 10px;
+        }
+
+        .info-card ul li a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-card ul li a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js 容器 -->
+    <div id="three-container"></div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+        <!-- 个人基本信息 -->
+        <div class="info-card">
+            <h1>个人基本信息</h1>
+            <p>姓名：张三</p>
+            <p>职业：Web 开发者</p>
+            <p>联系方式：zhangsan@example.com</p>
+        </div>
+
+        <!-- 爱好 -->
+        <div class="info-card">
+            <h1>爱好</h1>
+            <ul>
+                <li>编程</li>
+                <li>阅读</li>
+                <li>旅行</li>
+            </ul>
+        </div>
+
+        <!-- 新闻列表 -->
+        <div class="info-card">
+            <h1>热点新闻</h1>
+            <ul id="news-list"></ul>
+        </div>
+    </div>
+
+    <!-- 引入 Three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 引入 GLTFLoader -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        // Three.js 场景设置
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('three-container').appendChild(renderer.domElement);
+
+        // 环境光
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        // 聚光灯
+        const spotLight = new THREE.SpotLight(0xffffff, 0.8);
+        spotLight.position.set(10, 10, 10);
+        scene.add(spotLight);
+
+        camera.position.z = 5;
+
+        // 加载 GLTF 模型
+        const loader = new GLTFLoader();
+        loader.load(
+            'nezha.glb', // 替换为你的哪吒 3D 模型文件路径
+            function (gltf) {
+                const model = gltf.scene;
+                model.scale.set(0.5, 0.5, 0.5); // 调整模型大小
+                scene.add(model);
+            },
+            undefined,
+            function (error) {
+                console.error('加载模型时出错:', error);
+            }
+        );
+
+        // 渲染循环
+        function animate() {
+            requestAnimationFrame(animate);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // 获取新闻列表
+        async function getNews() {
+            try {
+                const response = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=YOUR_API_KEY');
+                const data = await response.json();
+                const newsList = document.getElementById('news-list');
+
+                data.articles.forEach(article => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = article.url;
+                    link.textContent = article.title;
+                    listItem.appendChild(link);
+                    newsList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('获取新闻时出错:', error);
+            }
+        }
+
+        getNews();
+    </script>
+</body>
+
+</html>
